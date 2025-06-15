@@ -395,3 +395,48 @@
   font-style: italic;
   color: #005a91;
 }
+
+.reviews {
+  background: linear-gradient(to bottom, #e6f5ff, #f7fbff);
+  padding: 3rem 1rem;
+  text-align: center;
+}
+.carousel-wrapper {
+  overflow: hidden;
+  max-width: 700px;
+  margin: 2rem auto;
+  position: relative;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+}
+
+.review-card {
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 85, 155, 0.08);
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+.review-card p {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.review-card .stars {
+  font-size: 1.5rem;
+  color: #ffbb00;
+  margin: 1rem 0;
+}
+
+.review-card h4 {
+  color: #005a91;
+  font-weight: 600;
+}

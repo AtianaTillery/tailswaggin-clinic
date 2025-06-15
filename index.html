@@ -142,6 +142,47 @@
       </div>
     </div>
   </section>
+<section class="reviews">
+  <div class="container">
+    <h2>What Our Clients Say</h2>
+    <div class="carousel-wrapper">
+      <div class="carousel" id="review-carousel">
+        <div class="review-card">
+          <p>"TailsWaggin' took amazing care of my cat during an emergency. The whole staff was gentle and informative!"</p>
+          <div class="stars">★★★★★</div>
+          <h4>— Rachel T.</h4>
+        </div>
+        <div class="review-card">
+          <p>"We’ve been bringing our dog here for years. They’re like a second family!"</p>
+          <div class="stars">★★★★★</div>
+          <h4>— Jason M.</h4>
+        </div>
+        <div class="review-card">
+          <p>"The clinic is always spotless, and they treat my pets with so much love. Highly recommend."</p>
+          <div class="stars">★★★★★</div>
+          <h4>— Liana S.</h4>
+        </div>
+        <div class="review-card">
+          <p>"Super affordable, very accommodating, and their front desk staff is the nicest!"</p>
+          <div class="stars">★★★★★</div>
+          <h4>— Andre V.</h4>
+        </div>
+        <div class="review-card">
+          <p>"The veterinarians explained everything clearly and didn’t push anything unnecessary."</p>
+          <div class="stars">★★★★★</div>
+          <h4>— Tina L.</h4>
+        </div>
+        <!-- Cloned first slide for seamless loop -->
+        <div class="review-card">
+          <p>"TailsWaggin' took amazing care of my cat during an emergency. The whole staff was gentle and informative!"</p>
+          <div class="stars">★★★★★</div>
+          <h4>— Rachel T.</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
   <section class="divider"></section>
 
@@ -171,6 +212,30 @@
       </p>
     </div>
   </footer>
+<script>
+  const carousel = document.getElementById("review-carousel");
+  const slides = carousel.children.length;
+  let index = 0;
+
+  function slideNext() {
+    index++;
+    carousel.style.transition = "transform 0.6s ease-in-out";
+    carousel.style.transform = `translateX(-${index * 100}%)`;
+
+    if (index === slides - 1) {
+      // wait for transition to finish before jumping back
+      setTimeout(() => {
+        carousel.style.transition = "none";
+        carousel.style.transform = "translateX(0)";
+        index = 0;
+      }, 700);
+    }
+  }
+
+  setInterval(slideNext, 5000);
+</script>
+
+
 
 </body>
 </html>
