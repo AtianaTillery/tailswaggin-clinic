@@ -261,3 +261,24 @@
     }
   }
   
+.form-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.back-dark {
+  background-color: #003f6b;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  display: inline-block;
+  transition: background 0.3s ease;
+}
+
+.back-dark:hover {
+  background-color: #002f4f;
+}
