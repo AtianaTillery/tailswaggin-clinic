@@ -18,29 +18,35 @@
   <!-- Appointment Form Section -->
   <section class="light-section">
     <div class="container contact-grid">
-      <form>
-        <h2>Request an Appointment</h2>
-        <p>Please fill out the form below. A team member will contact you to confirm your appointment.</p>
-        <input type="text" placeholder="Your Full Name" required />
+      <form id="appointment-form" onsubmit="handleAppointmentSubmit(event)">
+        <h2>Book an Appointment</h2>
+        <input type="text" placeholder="Pet Owner's Name" required />
         <input type="email" placeholder="Email Address" required />
-        <input type="tel" placeholder="Phone Number" required />
         <input type="text" placeholder="Pet's Name" required />
-        <input type="text" placeholder="Breed / Species" />
-        <input type="date" placeholder="Preferred Appointment Date" />
-        <textarea placeholder="Reason for visit or any special concerns"></textarea>
         
+        <label for="appt-date">What date would you like your appointment?</label>
+        <input type="date" id="appt-date" required />
+
+        <label for="appt-time">Preferred Time</label>
+        <select id="appt-time" required>
+          <option value="">Select a date first</option>
+        </select>
+
+        <textarea placeholder="Reason for Visit" required></textarea>
+
         <div class="form-buttons">
           <button type="submit" class="btn">Submit Request</button>
-          <a href="index.html" class="btn back-dark">← Back to Home</a>
+          <a href="index.html" class="btn btn-secondary">Back to Home</a>
         </div>
       </form>
 
-      <div class="location">
-        <h3>Need Help?</h3>
-        <p>📍 123 Petal Lane, Pawville, NC</p>
-        <p>📞 (555) 123-4567</p>
-        <p>📧 hello@tailswagginvet.com</p>
-        <p><strong>Hours:</strong><br>Mon–Sat: 8AM–6PM<br>Sun: Closed</p>
+      <!-- Confirmation popup -->
+      <div class="popup" id="appointment-popup">
+        <div class="popup-box">
+          <p>✅ Appointment request received! We’ll reach out to confirm your visit shortly.</p>
+          <p>If this is an emergency, please call our 24/7 hotline: <strong>484-228-3333</strong>.</p>
+          <button onclick="closeAppointmentPopup()">Close</button>
+        </div>
       </div>
     </div>
   </section>
@@ -54,6 +60,69 @@
       </p>
     </div>
   </footer>
+
+  <!-- JavaScript -->
+  <script>
+    function handleAppointmentSubmit(e) {
+      e.preventDefault();
+      document.getElementById("appointment-popup").style.display = "flex";
+      document.getElementById("appointment-form").reset();
+      document.getElementById("appt-time").innerHTML = '<option value="">Select a date first</option>';
+    }
+
+    function closeAppointmentPopup() {
+      document.getElementById("appointment-popup").style.display = "none";
+    }
+
+    // Generate time slots in 30-min intervals
+    function generateTimeSlots(startHour, endHour) {
+      const slots = [];
+      for (let h = startHour; h <= endHour; h++) {
+        slots.push(`${h}:00`);
+        if (h !== endHour) slots.push(`${h}:30`);
+      }
+      return slots;
+    }
+
+    const daySchedules = {
+      1: generateTimeSlots(8, 17),  // Monday (8–5:30)
+      2: generateTimeSlots(8, 17),  // Tuesday
+      3: generateTimeSlots(8, 19),  // Wednesday (8–7:30)
+      4: generateTimeSlots(8, 17),  // Thursday
+      5: generateTimeSlots(8, 13)   // Friday (8–1:30)
+    };
+
+    document.getElementById("appt-date").addEventListener("change", function () {
+      const date = new Date(this.value);
+      const day = date.getUTCDay(); // 0 (Sun) to 6 (Sat)
+      const select = document.getElementById("appt-time");
+      select.innerHTML = "";
+
+      if (daySchedules[day]) {
+        const times = daySchedules[day];
+        const labelOption = document.createElement("option");
+        labelOption.textContent = "-- Select a Time --";
+        labelOption.value = "";
+        select.appendChild(labelOption);
+
+        times.forEach(t => {
+          const option = document.createElement("option");
+          option.textContent = t.includes(":00") ? `${t} AM` : `${t} AM`;
+          let hour = parseInt(t.split(":")[0]);
+          if (hour >= 12) {
+            option.textContent = `${hour > 12 ? hour - 12 : hour}:${t.split(":")[1]} PM`;
+          }
+          option.value = option.textContent;
+          select.appendChild(option);
+        });
+      } else {
+        const closedOption = document.createElement("option");
+        closedOption.textContent = "Closed on weekends";
+        closedOption.value = "";
+        select.appendChild(closedOption);
+      }
+    });
+  </script>
 
 </body>
 </html>

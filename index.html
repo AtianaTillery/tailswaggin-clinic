@@ -8,12 +8,14 @@
 </head>
 <body>
 
+  <!-- Top Banner -->
   <div class="top-banner">
     <div class="container">
       <p>🐾 Now accepting new patients! Call today to schedule your pet's visit.</p>
     </div>
   </div>
 
+  <!-- Hero Section -->
   <header>
     <div class="hero">
       <div class="overlay">
@@ -26,7 +28,20 @@
     </div>
   </header>
 
+  <!-- Hours of Operation -->
+  <section class="hours-schedule">
+    <p><span class="label">⏰ Hours of Operation:</span> 
+      <span class="pill">Mon–Tue & Thu: 8AM–6PM</span> 
+      <span class="pill">Wed: 8AM–8PM</span> 
+      <span class="pill">Fri: 8AM–2PM</span> 
+      <span class="pill closed">Sat–Sun: Closed</span>
+    </p>
+  </section>
+
+  <!-- Divider -->
   <section class="divider"></section>
+
+
 
   <section class="services" id="services">
     <div class="container">
@@ -188,20 +203,23 @@
 
   <section class="contact" id="contact">
     <div class="container contact-grid">
-      <form>
-        <h2>Request an Appointment</h2>
-        <input type="text" placeholder="Your Name" required />
-        <input type="email" placeholder="Email Address" required />
-        <textarea placeholder="Your Message" required></textarea>
-        <button type="submit" class="btn">Send Message</button>
-      </form>
-      <div class="location">
-        <h3>Visit Us</h3>
-        <p><strong>Address:</strong><br>123 Petal Lane, Pawville, NC</p>
-        <p><strong>Phone:</strong><br>(555) 123-4567</p>
-        <p><strong>Email:</strong><br>hello@tailswagginvet.com</p>
-      </div>
-    </div>
+<form id="contact-form" onsubmit="handleSubmit(event)">
+  <h2>Request an Appointment</h2>
+  <input type="text" placeholder="Your Name" required />
+  <input type="email" placeholder="Email Address" required />
+  <textarea placeholder="Your Message" required></textarea>
+  <button type="submit" class="btn">Send Message</button>
+</form>
+
+<!-- Confirmation popup -->
+<div class="popup" id="popup">
+  <div class="popup-box">
+    <p>✅ Your message has been sent! We’ll get back to you within 1–2 business days.</p>
+    <p>If this is an emergency, please call our emergency vet hotline: <strong>484-228-3333</strong>.</p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+</div>
+
   </section>
 
   <footer>
@@ -235,6 +253,30 @@
   setInterval(slideNext, 5000);
 </script>
 
+<script>
+  function handleSubmit(e) {
+    e.preventDefault(); // prevent page reload
+    document.getElementById("popup").style.display = "flex";
+    // optionally reset form:
+    document.getElementById("contact-form").reset();
+  }
+
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+  }
+</script>
+
+<script>
+  function handleAppointmentSubmit(e) {
+    e.preventDefault(); // prevent form reload
+    document.getElementById("appointment-popup").style.display = "flex";
+    document.getElementById("appointment-form").reset();
+  }
+
+  function closeAppointmentPopup() {
+    document.getElementById("appointment-popup").style.display = "none";
+  }
+</script>
 
 
 </body>
